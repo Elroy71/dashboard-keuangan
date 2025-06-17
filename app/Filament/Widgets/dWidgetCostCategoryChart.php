@@ -53,12 +53,11 @@ class dWidgetCostCategoryChart extends ChartWidget
                     'label' => 'Total Pengeluaran (Rp)',
                     'data' => $totals,
                     // 4. Menggunakan multi-warna agar setiap bar berbeda
-                    'backgroundColor' => [
-                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-                        '#FF9F40', '#C9CBCF', '#FFCD56', '#2E8B57', '#DAA520',
-                    ],
-                ],
+                    'backgroundColor' => '#FED16A',
+                    'hoverBackgroundColor' => '#F3A26D',
+                    'borderRadius' => 4,
             ],
+        ], 
             'labels' => $labels,
         ];
     }

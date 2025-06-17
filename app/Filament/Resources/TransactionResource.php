@@ -16,14 +16,10 @@ use Filament\Forms\Set; // Import class Set
 class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
-    protected static ?int $navigationSort = 1;
 
+    protected static ?int $navigationSort = 1;
     protected static ?string $navigationGroup = 'Keuangan';
     protected static ?string $navigationIcon = 'heroicon-o-receipt-refund';
-    
-    // Kita akan gunakan lifecycle hook 'saving' yang lebih universal
-    // protected static function mutateFormDataBeforeCreate(array $data): array ... (ini bisa dihapus)
-    // protected static function mutateFormDataBeforeSave(array $data): array ... (ini bisa dihapus)
 
     public static function form(Form $form): Form
     {

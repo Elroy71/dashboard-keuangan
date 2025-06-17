@@ -16,16 +16,19 @@ class aStatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
-        // --- Bagian untuk "Total Pengeluaran" (Stat 1) - TIDAK DIUBAH ---
-        $filterStartDate = filled($this->filters['startDate'] ?? null)
+        // 1. Menggunakan periode default yang konsisten (3 bulan terakhir)
+        $defaultStartDate = now()->subMonths(2)->startOfMonth();
+        $defaultEndDate = now()->endOfMonth();
+
+        $startDate = filled($this->filters['startDate'] ?? null)
             ? Carbon::parse($this->filters['startDate'])
-            : now()->startOfMonth();
+            : $defaultStartDate;
 
-        $filterEndDate = filled($this->filters['endDate'] ?? null)
+        $endDate = filled($this->filters['endDate'] ?? null)
             ? Carbon::parse($this->filters['endDate'])
-            : now()->endOfMonth();
+            : $defaultEndDate;
 
-        $totalPengeluaran = Transaction::whereBetween('date_transaction', [$filterStartDate, $filterEndDate])
+        $totalPengeluaran = Transaction::whereBetween('date_transaction', [$startDate, $endDate])
             ->sum('amount');
 
         $rate = CurrencyService::getRate('IDR', 'USD');
@@ -101,11 +104,10 @@ class aStatsOverview extends BaseWidget
                 ->color('warning'),
 
             // Stat 3: DIUBAH MENJADI SELISIH FORECAST
-            Stat::make('Selisih (vs 3 Bln Lalu)', 'Rp ' . number_format($difference, 0, ',', '.'))
+            Stat::make('Periode Difference', 'Rp ' . number_format($difference, 0, ',', '.'))
                 ->description('$' . number_format($differenceUsd, 2))
                 ->descriptionIcon('heroicon-m-arrows-up-down')
                 ->color($difference > 0 ? 'success' : ($difference < 0 ? 'danger' : 'gray')),
         ];
     }
-
 }

@@ -14,7 +14,7 @@ class cWidgetExpenseChart extends ChartWidget
     use InteractsWithPageFilters;
 
     protected static ?string $heading = 'Tren Pengeluaran Bulanan'; // Judul lebih deskriptif
-    protected static string $color = 'danger'; // Memberi warna merah pada header
+    // protected static string $color = 'danger'; // Memberi warna merah pada header
 
     protected function getData(): array
     {
@@ -50,8 +50,8 @@ class cWidgetExpenseChart extends ChartWidget
                 [
                     'label' => 'Pengeluaran per bulan', // Label disesuaikan dengan data
                     'data' => $chartData,
-                    'backgroundColor' => 'rgba(239, 68, 68, 0.2)', // Warna merah (danger) transparan
-                    'borderColor' => 'rgb(239, 68, 68)', // Warna merah solid
+                    'backgroundColor' => 'rgb(255, 244, 164)',
+                    // 'borderColor' => 'rgb(239, 68, 68)', // Warna merah solid
                     'tension' => 0.4,
                     'fill' => true,
                 ],

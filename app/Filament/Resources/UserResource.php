@@ -20,9 +20,9 @@ class UserResource extends Resource
 
     // --- PENGATURAN NAVIGASI SIDEBAR ---
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup = 'Pengaturan Akun';
+    protected static ?string $navigationGroup = 'Sistem';
     protected static ?string $navigationLabel = 'Manajemen User';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 5;
 
 
     public static function form(Form $form): Form

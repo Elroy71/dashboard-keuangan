@@ -10,6 +10,7 @@ use Filament\Widgets\ChartWidget;
 class fWidgetForecastChart extends ChartWidget
 {
     protected static ?string $heading = 'Forecast Pengeluaran per Bulan (Estimasi)';
+
     protected function getType(): string
     {
         return 'line';
