@@ -79,6 +79,7 @@ class VendorResource extends Resource
                 Tables\Columns\IconColumn::make('is_active')->label('Recurring')->boolean(),
                 Tables\Columns\TextColumn::make('recurring_type')->label('Jenis Tagihan'),
                 Tables\Columns\TextColumn::make('vendor_start')->date()->sortable(),
+                Tables\Columns\TextColumn::make('vendor_end')->date()->sortable(),
             ])
 
             ->filters([
