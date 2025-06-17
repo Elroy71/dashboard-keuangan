@@ -162,4 +162,9 @@ class TransactionResource extends Resource
             'edit' => Pages\EditTransaction::route('/{record}/edit'), // Aktifkan kembali
         ];
     }    
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->role === 'admin';
+    }
 }

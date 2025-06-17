@@ -107,4 +107,9 @@ class VendorResource extends Resource
             'edit' => Pages\EditVendor::route('/{record}/edit'),
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->role === 'admin';
+    }
 }

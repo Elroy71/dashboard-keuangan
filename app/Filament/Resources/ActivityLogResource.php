@@ -89,4 +89,9 @@ class ActivityLogResource extends Resource
     {
         return false;
     }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->role === 'admin';
+    }
 }
