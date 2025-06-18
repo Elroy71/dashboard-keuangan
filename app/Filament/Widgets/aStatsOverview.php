@@ -15,7 +15,7 @@ class aStatsOverview extends BaseWidget
     use InteractsWithPageFilters;
 
     protected function getStats(): array
-    {
+{
         // 1. Menggunakan periode default yang konsisten (3 bulan terakhir)
         $defaultStartDate = now()->subMonths(2)->startOfMonth();
         $defaultEndDate = now()->endOfMonth();

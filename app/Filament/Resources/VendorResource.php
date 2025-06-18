@@ -32,40 +32,21 @@ class VendorResource extends Resource
                     Forms\Components\TextInput::make('name')
                         ->label('Nama Vendor')
                         ->required()
-                        ->maxLength(255)
-                        ->columnSpanFull(), // Ambil lebar penuh
-
-                    // vendor_start dan vendor_end dipindahkan ke sini karena ini
-                    // adalah informasi dasar vendor, bukan hanya untuk recurring.
+                        ->maxLength(255),
+                    Forms\Components\Select::make('recurring_type')
+                    ->label('Jenis Tagihan')
+                    ->options([
+                        'Bulanan' => 'Bulanan',
+                        'Tahunan' => 'Tahunan',
+                        ])->required(),
                     Forms\Components\DatePicker::make('vendor_start')
                         ->label('Tanggal Mulai Kontrak')
                         ->required(),
-
                     Forms\Components\DatePicker::make('vendor_end')
                         ->label('Tanggal Akhir Kontrak'),
-                ])
-                ->columns(2), // Membuat layout menjadi 2 kolom
 
-            // BAGIAN 2: Pengaturan khusus untuk tagihan berulang
-            Forms\Components\Section::make('Pengaturan Tagihan Berulang (Recurring)')
-                ->description('Aktifkan jika vendor ini memiliki tagihan rutin bulanan atau tahunan.')
-                ->schema([
                     Forms\Components\Toggle::make('is_active')
-                        ->label('Jadikan Vendor Recurring?')
-                        ->live(), // Penting agar form langsung bereaksi
-
-                    // recurring_type dipindahkan ke sini, di dalam grupnya.
-                    // Field ini hanya akan muncul jika toggle di atas aktif.
-                    Forms\Components\Select::make('recurring_type')
-                        ->label('Jenis Tagihan')
-                        ->options([
-                            'Bulanan' => 'Bulanan',
-                            'Tahunan' => 'Tahunan',
-                        ])
-                        ->required(fn (Get $get) => $get('is_active')) // Wajib diisi HANYA jika recurring aktif
-                        ->visible(fn (Get $get) => $get('is_active')), // Terlihat HANYA jika recurring aktif
-                ])
-                ->columns(2),
+                    ])->columns(2), // Membuat layout menjadi 2 kolom
         ]);
 
     }
