@@ -12,6 +12,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "malzariey/filament-daterangepicker-filter": "^4.0",
         "spatie/laravel-activitylog": "^4.10"
     },
     "require-dev": {

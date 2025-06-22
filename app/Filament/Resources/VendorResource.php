@@ -56,11 +56,22 @@ class VendorResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\IconColumn::make('is_active')->label('Recurring')->boolean(),
-                Tables\Columns\TextColumn::make('recurring_type')->label('Jenis Tagihan'),
-                Tables\Columns\TextColumn::make('vendor_start')->date()->sortable(),
-                Tables\Columns\TextColumn::make('vendor_end')->date()->sortable(),
+                Tables\Columns\TextColumn::make('no')
+                    ->label('No.')
+                    ->rowIndex(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label('Is Active')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('recurring_type')
+                    ->label('Jenis Tagihan'),
+                Tables\Columns\TextColumn::make('vendor_start')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('vendor_end')
+                    ->date()
+                    ->sortable(),
             ])
 
             ->filters([

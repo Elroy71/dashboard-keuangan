@@ -64,6 +64,7 @@ class CreateRecurringTransactions extends Command
                         'amount_dollar' => $templateTransaction->amount_dollar,
                         'description' => 'Pembayaran ' . $vendor->recurring_type . ' otomatis untuk ' . $vendor->name,
                         'image' => null,
+                        'is_paid' => false,
                     ]);
                     $this->info("   -> Transaksi dibuat untuk tanggal: " . $cursorDate->format('d M Y'));
                 } else {

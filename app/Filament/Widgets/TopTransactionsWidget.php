@@ -55,7 +55,7 @@ class TopTransactionsWidget extends BaseWidget
 
             // Kolom 5: Status Recurring (menggunakan ikon)
             Tables\Columns\IconColumn::make('vendor.is_active')
-                ->label('Recurring')
+                ->label('Is Active')
                 ->boolean()
                 ->trueIcon('heroicon-o-check-circle')
                 ->falseIcon('heroicon-o-x-circle'),

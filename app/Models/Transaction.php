@@ -21,7 +21,8 @@ class Transaction extends Model
             'currency',
             'amount',
             'amount_dollar',
-            'image'
+            'image',
+            'is_paid',
         ];
     
     // --- TAMBAHKAN METHOD INI UNTUK KONFIGURASI LOG ---

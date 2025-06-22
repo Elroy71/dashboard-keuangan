@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('amount_dollar', 15, 2)->default(0);
             $table->string('currency', 10);
             $table->string('image')->nullable(); // <-- Sebaiknya nullable
+            $table->boolean('is_paid')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

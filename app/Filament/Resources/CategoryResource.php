@@ -40,10 +40,14 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('no')
+                    ->label('No.')
+                    ->rowIndex(),
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('status')
+                    ->label('Is Active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make(name: 'created_at')
                     ->dateTime()
