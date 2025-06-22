@@ -12,6 +12,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Get; // Import class Get
 use Filament\Forms\Set; // Import class Set
+use Filament\Tables\Filters\SelectFilter;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use Filament\Tables\Columns\ToggleColumn; // <-- Jangan lupa import di atas
+use Filament\Tables\Filters\TernaryFilter; // <-- Jangan lupa import di atas
+use Filament\Tables\Columns\BadgeColumn; // <-- Jangan lupa import di atas
+
 
 class TransactionResource extends Resource
 {
@@ -81,15 +87,15 @@ class TransactionResource extends Resource
                             $set('amount', round($state * $rate, 0));
                         }
                     }),
-                // --- AKHIR DARI PERUBAHAN FORM ---
-
-                // Forms\Components\Textarea::make('description') // Pastikan ini 'description' sesuai migrasi
-                //     ->label('Deskripsi')
-                //     ->columnSpanFull(),
 
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->disk('public')
+                    ->columnSpanFull(),
+                
+                Forms\Components\Toggle::make('is_paid')
+                    ->label('Tandai Sebagai Sudah Lunas')
+                    ->default(true) // Saat buat manual, asumsikan sudah lunas
                     ->columnSpanFull(),
             ])->columns(2);
     }
@@ -98,6 +104,10 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('no')
+                    ->label('No.')
+                    ->rowIndex(),
+
                 Tables\Columns\TextColumn::make('date_transaction')
                     ->label('Tanggal')
                     ->date('d M Y')
@@ -130,12 +140,54 @@ class TransactionResource extends Resource
 
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Invoice'),
-            ])
+
+                // --- TAMBAHKAN KOLOM STATUS INI ---
+                BadgeColumn::make('is_paid') // ... dari langkah sebelumnya
+                    ->label('Status'),
+
+            // --- TAMBAHKAN KOLOM TOGGLE INI ---
+                ToggleColumn::make('is_paid')
+                    ->label('Lunas?'),
+            ])->defaultSort('date_transaction', 'desc')
+
+
+
+                    // --- MULAI PENAMBAHAN FILTER DI SINI ---
             ->filters([
-                // filter akan kita tambahkan nanti
+                // Filter 1: Berdasarkan Rentang Tanggal
+                DateRangeFilter::make('date_transaction')
+                    ->label('Rentang Tanggal'),
+
+                // Filter 2: Berdasarkan Kategori
+                SelectFilter::make('category_id')
+                    ->label('Kategori')
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload(),
+
+                // Filter 3: Berdasarkan Vendor
+                SelectFilter::make('vendor_id')
+                    ->label('Vendor')
+                    ->relationship('vendor', 'name')
+                    ->searchable()
+                    ->preload(),
+
+                // ... filter Anda yang sudah ada ...
+                DateRangeFilter::make('date_transaction')->label('Rentang Tanggal'),
+                SelectFilter::make('category_id')->label('Kategori')->relationship('category', 'name')->searchable()->preload(),
+                SelectFilter::make('vendor_id')->label('Vendor')->relationship('vendor', 'name')->searchable()->preload(),
+
+                // --- TAMBAHKAN FILTER STATUS INI ---
+                TernaryFilter::make('is_paid')
+                    ->label('Status Pelunasan')
+                    ->trueLabel('Lunas')
+                    ->falseLabel('Belum Lunas')
+                    ->native(false),
             ])
+            // --- AKHIR PENAMBAHAN FILTER ---
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
