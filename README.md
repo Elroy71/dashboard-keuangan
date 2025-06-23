@@ -2,7 +2,7 @@
 
 Selamat datang di Dashboard Keuangan V2, sebuah aplikasi web yang dirancang untuk membantu memantau dan mengelola transaksi keuangan secara efisien. Aplikasi ini dibangun di atas tumpukan teknologi modern menggunakan Laravel dan Filament, dengan fokus pada fungsionalitas, keamanan, dan pengalaman pengguna yang bersih.
 
-![Screenshot Dashboard](D:\LARAVEL\dashboard-keuangan - Version 3\Dashboard-utama.png) 
+![Tampilan Dashboard Utama](public/images/Dashboard-utama.png)
 
 ---
 
