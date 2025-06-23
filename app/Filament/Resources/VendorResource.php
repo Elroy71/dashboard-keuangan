@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Get;
+use Filament\Tables\Columns\ToggleColumn;
 
 class VendorResource extends Resource
 {
@@ -61,9 +62,10 @@ class VendorResource extends Resource
                     ->rowIndex(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label('Is Active')
-                    ->boolean(),
+
+                ToggleColumn::make('is_active')
+                    ->label('Is Active?'),
+
                 Tables\Columns\TextColumn::make('recurring_type')
                     ->label('Jenis Tagihan'),
                 Tables\Columns\TextColumn::make('vendor_start')

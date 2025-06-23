@@ -141,11 +141,10 @@ class TransactionResource extends Resource
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Invoice'),
 
-                // --- TAMBAHKAN KOLOM STATUS INI ---
                 BadgeColumn::make('is_paid') // ... dari langkah sebelumnya
                     ->label('Status'),
 
-            // --- TAMBAHKAN KOLOM TOGGLE INI ---
+
                 ToggleColumn::make('is_paid')
                     ->label('Lunas?'),
             ])->defaultSort('date_transaction', 'desc')
@@ -173,9 +172,18 @@ class TransactionResource extends Resource
                     ->preload(),
 
                 // ... filter Anda yang sudah ada ...
-                DateRangeFilter::make('date_transaction')->label('Rentang Tanggal'),
-                SelectFilter::make('category_id')->label('Kategori')->relationship('category', 'name')->searchable()->preload(),
-                SelectFilter::make('vendor_id')->label('Vendor')->relationship('vendor', 'name')->searchable()->preload(),
+                DateRangeFilter::make('date_transaction')
+                    ->label('Rentang Tanggal'),
+                SelectFilter::make('category_id')
+                    ->label('Kategori')
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('vendor_id')
+                    ->label('Vendor')
+                    ->relationship('vendor', 'name')
+                    ->searchable()
+                    ->preload(),
 
                 // --- TAMBAHKAN FILTER STATUS INI ---
                 TernaryFilter::make('is_paid')

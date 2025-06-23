@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -46,9 +47,8 @@ class CategoryResource extends Resource
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('status')
-                    ->label('Is Active')
-                    ->boolean(),
+                ToggleColumn::make('status')
+                    ->label('Is ACtive?'),
                 Tables\Columns\TextColumn::make(name: 'created_at')
                     ->dateTime()
                     ->sortable()
